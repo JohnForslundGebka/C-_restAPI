@@ -1,0 +1,184 @@
+{
+    "magical_items": [
+        {
+            "name": "Amulet of Eternal Flame",
+            "description": "A ruby amulet that glows with an inner fire, granting resistance to fire damage.",
+            "article_number": "MF001",
+            "value_gold": 200
+        },
+        {
+            "name": "Staff of Whispering Shadows",
+            "description": "A darkwood staff that murmurs secrets in the night. It can cast invisibility once per day.",
+            "article_number": "MF002",
+            "value_gold": 350
+        },
+        {
+            "name": "Ring of Boundless Vitality",
+            "description": "An emerald ring that enhances the wearer’s stamina, granting +2 to Constitution.",
+            "article_number": "MF003",
+            "value_gold": 500
+        },
+        {
+            "name": "Cloak of the Fallen Star",
+            "description": "A cloak shimmering like starlight that grants resistance to necrotic damage.",
+            "article_number": "MF004",
+            "value_gold": 275
+        },
+        {
+            "name": "Boots of Silent Passage",
+            "description": "Soft leather boots that muffle footsteps, allowing stealthy movement.",
+            "article_number": "MF005",
+            "value_gold": 150
+        },
+        {
+            "name": "Orb of Illusory Echoes",
+            "description": "A crystal orb that can project illusions of sounds from its surroundings.",
+            "article_number": "MF006",
+            "value_gold": 320
+        },
+        {
+            "name": "Elixir of Swift Healing",
+            "description": "A vial of sparkling blue liquid that restores 20 hit points when consumed.",
+            "article_number": "MF007",
+            "value_gold": 90
+        },
+        {
+            "name": "Lantern of the Luminous Path",
+            "description": "A lantern that casts a radiant light, revealing invisible creatures within its range.",
+            "article_number": "MF008",
+            "value_gold": 175
+        },
+        {
+            "name": "Pendant of True Sight",
+            "description": "A silver pendant that grants true sight for one minute once per day.",
+            "article_number": "MF009",
+            "value_gold": 600
+        },
+        {
+            "name": "Gauntlets of Ogre Strength",
+            "description": "Heavy gauntlets that grant the wearer an increased Strength of 19.",
+            "article_number": "MF010",
+            "value_gold": 450
+        },
+        {
+            "name": "Helm of the Stormcaller",
+            "description": "A steel helm that allows the wearer to cast thunderwave once per day.",
+            "article_number": "MF011",
+            "value_gold": 300
+        },
+        {
+            "name": "Belt of the Winter's Chill",
+            "description": "A fur-lined belt that grants resistance to cold damage.",
+            "article_number": "MF012",
+            "value_gold": 225
+        },
+        {
+            "name": "Bracers of Swift Deflection",
+            "description": "Leather bracers that provide a +1 bonus to Armor Class.",
+            "article_number": "MF013",
+            "value_gold": 375
+        },
+        {
+            "name": "Potion of Feathered Descent",
+            "description": "A potion that allows the drinker to fall slowly, as if under the effect of feather fall.",
+            "article_number": "MF014",
+            "value_gold": 50
+        },
+        {
+            "name": "Chalice of Fading Shadows",
+            "description": "A silver chalice that allows the drinker to become invisible for 10 minutes.",
+            "article_number": "MF015",
+            "value_gold": 550
+        },
+        {
+            "name": "Sword of the Eternal Frost",
+            "description": "A longsword that deals an extra 1d6 cold damage on hit.",
+            "article_number": "MF016",
+            "value_gold": 750
+        },
+        {
+            "name": "Cape of Elemental Harmony",
+            "description": "A colorful cape that provides resistance to one elemental damage type of the wearer’s choice per day.",
+            "article_number": "MF017",
+            "value_gold": 675
+        },
+        {
+            "name": "Ring of the Boundless Mind",
+            "description": "A silver ring that grants a +2 bonus to Intelligence.",
+            "article_number": "MF018",
+            "value_gold": 500
+        },
+        {
+            "name": "Stone of Recall",
+            "description": "A small stone that allows the user to teleport to a location they have previously marked.",
+            "article_number": "MF019",
+            "value_gold": 800
+        },
+        {
+            "name": "Bracelet of the Arcane Ward",
+            "description": "A bracelet that provides a protective shield, absorbing up to 10 damage once per day.",
+            "article_number": "MF020",
+            "value_gold": 275
+        },
+        {
+            "name": "Elixir of the Phoenix",
+            "description": "A rare elixir that revives the drinker from death with 1 hit point once per month.",
+            "article_number": "MF021",
+            "value_gold": 1000
+        },
+        {
+            "name": "Dagger of Venomous Words",
+            "description": "A dagger that, when spoken to, can release a poisonous aura on hit.",
+            "article_number": "MF022",
+            "value_gold": 325
+        },
+        {
+            "name": "Shield of the Stone Sentinel",
+            "description": "A stone-crafted shield that grants resistance to bludgeoning damage.",
+            "article_number": "MF023",
+            "value_gold": 400
+        },
+        {
+            "name": "Mask of the Moonlit Thief",
+            "description": "A silver mask that enhances stealth and allows the wearer to see in darkness.",
+            "article_number": "MF024",
+            "value_gold": 300
+        },
+        {
+            "name": "Tome of Forgotten Knowledge",
+            "description": "A dusty book that grants +2 Wisdom upon reading, usable once per person.",
+            "article_number": "MF025",
+            "value_gold": 550
+        },
+        {
+            "name": "Horn of the Thunderous Charge",
+            "description": "A brass horn that can cast thunderous smite when blown.",
+            "article_number": "MF026",
+            "value_gold": 250
+        },
+        {
+            "name": "Necklace of the Deep",
+            "description": "A sapphire necklace that allows the wearer to breathe underwater and swim faster.",
+            "article_number": "MF027",
+            "value_gold": 325
+        },
+        {
+            "name": "Ring of the Watchful Eye",
+            "description": "A ring with an eye-shaped gem that grants advantage on perception checks.",
+            "article_number": "MF028",
+            "value_gold": 200
+        },
+        {
+            "name": "Robe of the Dream Weaver",
+            "description": "A robe that allows the wearer to cast sleep once per day.",
+            "article_number": "MF029",
+            "value_gold": 275
+        },
+        {
+            "name": "Wand of Eldritch Blasts",
+            "description": "A dark wand that can cast eldritch blast three times per day.",
+            "article_number": "MF030",
+            "value_gold": 400
+        }
+    ]
+}
