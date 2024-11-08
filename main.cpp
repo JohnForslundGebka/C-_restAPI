@@ -16,18 +16,6 @@ namespace http = beast::http;   // from <boost/beast/http.hpp>
 namespace net = boost::asio;    // from <boost/asio.hpp>
 using tcp = net::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
 
-nlohmann::json json_data;
-
-void load_json_data() {
-    std::ifstream json_file("/Users/John/CLionProjects/RESTfullAPI/data.json");
-    if (json_file.is_open()) {
-        json_file >> json_data;
-        json_file.close();
-        std::cout << "JSON data loaded successfully." << std::endl;
-    } else {
-        std::cerr << "Failed to open data.json file." << std::endl;
-    }
-}
 
 // This function produces an HTTP response for the given request.
 http::response<http::string_body> handle_request(http::request<http::string_body> const& req) {
@@ -168,7 +156,6 @@ private:
 
 int main() {
 
-    load_json_data();
     try {
         auto const address = net::ip::make_address("0.0.0.0");
         unsigned short port = 8080;
