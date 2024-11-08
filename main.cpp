@@ -7,6 +7,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <mutex>
 #include <thread>
 #include "nlohmann/json.hpp"
 #include <fstream>
@@ -17,68 +18,93 @@ namespace net = boost::asio;    // from <boost/asio.hpp>
 using tcp = net::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
 
 nlohmann::json json_data;
+std::mutex json_data_mutex;
 
 void load_json_data() {
-    std::ifstream json_file("/Users/John/CLionProjects/RESTfullAPI/data.json");
+    std::lock_guard<std::mutex> lock(json_data_mutex);
+    std::ifstream json_file("/Users/John/CLionProjects/Cpp_restAPI/data.json");
     if (json_file.is_open()) {
-        json_file >> json_data;
+        try {
+            json_file >> json_data;
+            std::cout << "JSON data loaded successfully." << std::endl;
+        } catch (nlohmann::json::parse_error& e) {
+            std::cerr << "JSON parsing error: " << e.what() << std::endl;
+            json_data = nlohmann::json::object();
+        }
         json_file.close();
-        std::cout << "JSON data loaded successfully." << std::endl;
     } else {
         std::cerr << "Failed to open data.json file." << std::endl;
+        json_data = nlohmann::json::object();
     }
 }
 
 // This function produces an HTTP response for the given request.
 http::response<http::string_body> handle_request(http::request<http::string_body> const& req) {
-    if (req.method() == http::verb::get && req.target() == "/api/data") {
-// Handle GET request
-        nlohmann::json json_response = {{"message", "This is a GET request"}};
-        http::response<http::string_body> res{http::status::ok, req.version()};
-        res.set(http::field::server, "Beast");
-        res.set(http::field::content_type, "application/json");
-        res.keep_alive(req.keep_alive());
-        res.body() = json_response.dump();
-        res.prepare_payload();
-        return res;
-    } else if (req.method() == http::verb::post && req.target() == "/api/data") {
-        // Handle POST request
-        auto json_request = nlohmann::json::parse(req.body());
-        std::string response_message = "Received: " + json_request.dump();
-        nlohmann::json json_response = {{"message", response_message}};
-        http::response<http::string_body> res{http::status::ok, req.version()};
-        res.set(http::field::server, "Beast");
-        res.set(http::field::content_type, "application/json");
-        res.keep_alive(req.keep_alive());
-        res.body() = json_response.dump();
-        res.prepare_payload();
-        return res;
-    } else if (req.method() == http::verb::put && req.target() == "/api/data") {
-        // Handle PUT request
-        auto json_request = nlohmann::json::parse(req.body());
-        std::string response_message = "Updated: " + json_request.dump();
-        nlohmann::json json_response = {{"message", response_message}};
-        http::response<http::string_body> res{http::status::ok, req.version()};
-        res.set(http::field::server, "Beast");
-        res.set(http::field::content_type, "application/json");
-        res.keep_alive(req.keep_alive());
-        res.body() = json_response.dump();
-        res.prepare_payload();
-        return res;
-    } else if (req.method() == http::verb::delete_ && req.target() == "/api/data") {
-        // Handle DELETE request
-        nlohmann::json json_response = {{"message", "Resource deleted"}};
-        http::response<http::string_body> res{http::status::ok, req.version()};
-        res.set(http::field::server, "Beast");
-        res.set(http::field::content_type, "application/json");
-        res.keep_alive(req.keep_alive());
-        res.body() = json_response.dump();
-        res.prepare_payload();
-        return res;
+    if (req.method() == http::verb::get) {
+        std::string target(req.target());
+        if (target == "/api/magical_items") {
+            // Serve all magical items
+            http::response<http::string_body> res{http::status::ok, req.version()};
+            res.set(http::field::server, "Beast");
+            res.set(http::field::content_type, "application/json");
+            res.keep_alive(req.keep_alive());
+
+            {
+                std::lock_guard<std::mutex> lock(json_data_mutex);
+                res.body() = json_data.dump();
+            }
+
+            res.prepare_payload();
+            return res;
+
+        } else if (target.find("/api/magical_items/") == 0) {
+            // Serve a specific magical item
+            std::string article_number = target.substr(std::string("/api/magical_items/").length());
+
+            nlohmann::json item;
+            bool found = false;
+
+            {
+                std::lock_guard<std::mutex> lock(json_data_mutex);
+                for (const auto& it : json_data["magical_items"]) {
+                    if (it["article_number"] == article_number) {
+                        item = it;
+                        found = true;
+                        break;
+                    }
+                }
+            }
+
+            if (found) {
+                // Return the found item
+                http::response<http::string_body> res{http::status::ok, req.version()};
+                res.set(http::field::server, "Beast");
+                res.set(http::field::content_type, "application/json");
+                res.keep_alive(req.keep_alive());
+                res.body() = item.dump();
+                res.prepare_payload();
+                return res;
+            } else {
+                // Item not found
+                http::response<http::string_body> res{http::status::not_found, req.version()};
+                res.set(http::field::server, "Beast");
+                res.set(http::field::content_type, "application/json");
+                res.keep_alive(req.keep_alive());
+                res.body() = "{\"error\":\"Item not found\"}";
+                res.prepare_payload();
+                return res;
+            }
+        }
     }
 
-    // Default response for unsupported methods
-    return http::response<http::string_body>{http::status::bad_request, req.version()};
+    // Default response for unsupported methods or endpoints
+    http::response<http::string_body> res{http::status::bad_request, req.version()};
+    res.set(http::field::server, "Beast");
+    res.set(http::field::content_type, "application/json");
+    res.keep_alive(req.keep_alive());
+    res.body() = "{\"error\":\"Unsupported request\"}";
+    res.prepare_payload();
+    return res;
 }
 
 // This class handles an HTTP server connection.
@@ -177,7 +203,6 @@ int main() {
 
         auto listener = std::make_shared<Listener>(ioc, tcp::endpoint{address, port});
         listener->run();
-
 
         ioc.run();
     } catch (const std::exception& e) {
