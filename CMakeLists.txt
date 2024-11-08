@@ -3,10 +3,6 @@ project(RESTfullAPI)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# Add Homebrew path for CMake to find libraries
-list(APPEND CMAKE_PREFIX_PATH /opt/homebrew)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
 
 # Find the nlohmann/json and Boost libraries
 find_package(nlohmann_json REQUIRED)
