@@ -22,7 +22,7 @@ std::mutex json_data_mutex;
 
 void load_json_data() {
     std::lock_guard<std::mutex> lock(json_data_mutex);
-    std::ifstream json_file("/Users/John/CLionProjects/Cpp_restAPI/data.json");
+    std::ifstream json_file("data.json");
     if (json_file.is_open()) {
         try {
             json_file >> json_data;
